@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.dvrecic.asnake"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="7" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:icon="@drawable/widget"
+        android:label="@string/app_name"
+        android:name="ApplicationASnake" >
+        <activity
+            android:label="@string/app_name"
+            android:name=".ASnakeActivity"
+            android:screenOrientation="landscape" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Game"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".HighScoreList"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".MenuOptions"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".About"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity android:name="edu.dvrecic.asnake.sensors.Orientation" >
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:screenOrientation="landscape" >
+        </activity>
+
+        <service
+            android:enabled="true"
+            android:name="edu.dvrecic.service.ServiceSound" />
+    </application>
+
+</manifest>

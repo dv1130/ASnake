@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/highscoresbg"
+    android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/textViewHighScores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="HIGHSCORES"
+        android:textColor="#000000"
+        android:textSize="14pt" />
+
+    <TextView
+        android:id="@+id/textViewPodatkiHS"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name        Score       When?"
+        android:textColor="#000000"
+        android:textSize="7pt" />
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="340dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="0dp" >
+
+    </ListView>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:screenOrientation="landscape" >
+    <PreferenceCategory android:title="Options" >
+
+        <EditTextPreference
+            android:dialogTitle="Player name"
+            android:key="PREF_IME"
+            android:summary="Name"
+            android:title="Player name" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
