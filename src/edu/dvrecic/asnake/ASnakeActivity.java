@@ -1,6 +1,5 @@
 package edu.dvrecic.asnake;
 
-import edu.dvrecic.asnake.sensors.Orientation;
 import edu.dvrecic.service.ServiceSound;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -83,7 +82,7 @@ public class ASnakeActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.about:
 			Intent i3 = new Intent();
-			i3.setClass(this, Orientation.class);
+			i3.setClass(this, About.class);
 			startActivity(i3);
 			break;
 		case R.id.exit:

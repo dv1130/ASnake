@@ -1,28 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/highscoresbg"
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/azimuth"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="30dp"
+        android:gravity="center" >
 
-    <TextView
-        android:id="@+id/pitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/textViewAsnake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="ASnake"
+            android:textColor="#000000"
+            android:textSize="10pt" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/roll"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp" >
+
+        <TextView
+            android:id="@+id/textViewMyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danijel Vrecic, E1029116"
+            android:textColor="#000000"
+            android:textSize="8pt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp" >
+
+        <TextView
+            android:id="@+id/textViewPT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Project: Pametni Telefon, FERI 2011/2012"
+            android:textColor="#000000"
+            android:textSize="8pt" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/textViewOpis"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="0.56"
+            android:gravity="left"
+            android:text="Se dolgocasite? Potem je ta igra prav za vas.
+ASnake je preprosta igra, kjer smo v vlogi kace in lovimo misi, ter zbiramo jajca! Za vsako mis dobimo tocko, med tem ko za vsako jajce dobimo nakljucen event."
+            android:textColor="#000000"
+            android:textSize="8pt" />
+    </LinearLayout>
 
 </LinearLayout>

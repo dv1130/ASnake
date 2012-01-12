@@ -26,9 +26,10 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="340dp"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="0dp" >
+        android:layout_marginLeft="0dp"
+>
 
     </ListView>
 

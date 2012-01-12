@@ -42,12 +42,12 @@ public class Orientation extends Activity implements OrientationListener {
 	@Override
 	public void onOrientationChanged(float azimuth, 
 			float pitch, float roll) {
-		((TextView) findViewById(R.id.azimuth)).setText(
+/*		((TextView) findViewById(R.id.azimuth)).setText(
 				String.valueOf(azimuth));
 		((TextView) findViewById(R.id.pitch)).setText(
 				String.valueOf(pitch));
 		((TextView) findViewById(R.id.roll)).setText(
-				String.valueOf(roll));
+				String.valueOf(roll));*/
 	}
 
 	@Override

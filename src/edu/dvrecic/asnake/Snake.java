@@ -54,8 +54,9 @@ public class Snake extends SurfaceView implements Runnable{
 	private MediaPlayer eatingSound;
 
 	Bitmap telo, glavaGor, glavaDol,
-	glavaDesno, glavaLevo, mis, jajce;
+	glavaDesno, glavaLevo, mis, jajce, ozadje;
 	int stX, stY;
+	float height, width;
 	boolean povecajKaco = false;
 	boolean stMisiVecKot10 = false; // bonuc jajce + 10 misi
 	int razmik; // razmik izrisa
@@ -95,6 +96,8 @@ public class Snake extends SurfaceView implements Runnable{
 		mis = Bitmap.createScaledBitmap(mis, velikostBitmap, velikostBitmap, false);
 		jajce = BitmapFactory.decodeResource(getResources(), R.drawable.egg);
 		jajce = Bitmap.createScaledBitmap(jajce, velikostBitmap, velikostBitmap, false);
+		ozadje = BitmapFactory.decodeResource(getResources(), R.drawable.bg2);
+		ozadje = Bitmap.createScaledBitmap(ozadje, 800, 404, false);
 
 		//nastavitev za poljeBitmap
 		poljeBitmap = new Bitmap[9];
@@ -115,7 +118,7 @@ public class Snake extends SurfaceView implements Runnable{
 		eatingSound.setLooping(false);
 		eatingSound.setVolume(60, 60);
 
-		tfScore = Typeface.createFromAsset(context.getAssets(),"data/fonts/chicken_butt.ttf");
+		tfScore = Typeface.createFromAsset(context.getAssets(),"data/fonts/fdfruta.ttf");
 		tfGame = Typeface.createFromAsset(context.getAssets(),"data/fonts/eye.TTF");
 
 		CONTEXT = context;
@@ -129,6 +132,8 @@ public class Snake extends SurfaceView implements Runnable{
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		height = h;
+		width = w;
 		stX = (int) Math.floor(w / razmik);
 		stY = (int) Math.floor(h / razmik);
 		System.out.println("w="+w+", h="+h);
@@ -169,13 +174,14 @@ public class Snake extends SurfaceView implements Runnable{
 		}	
 
 		c.drawARGB(255,255,255,255);
+		c.drawBitmap(ozadje, 0, 0, null);
 		Paint paint = new Paint(); 
 		//paint.setColor(Color.WHITE); 
 		paint.setStyle(Style.STROKE); 
 		//c.drawPaint(paint); 
 		paint.setColor(Color.BLACK); 
 		paint.setAntiAlias(true);
-		paint.setTextSize(48); 
+		paint.setTextSize(30); 
 		paint.setTypeface(tfScore);
 		String aString = Integer.toString(rezultat);
 		c.drawText("Score: "+aString, 10, 35, paint); 
@@ -451,7 +457,7 @@ public class Snake extends SurfaceView implements Runnable{
 				int r = randomSt.nextInt(10);
 				if(r == 0){
 					staraHitrost = hitrost;
-					hitrost = 0;
+					hitrost = 50;
 					rezultat++;
 				}else if( r == 1){
 					staraHitrost = hitrost;
@@ -519,8 +525,8 @@ public class Snake extends SurfaceView implements Runnable{
 	{
 		float x = event.getX();
 		float y = event.getY();
-		float height = 404;
-		float width = 800;
+		//float height = 404;
+		//float width = 800;
 		float slope = height/width;
 
 		// Only process DOWN action, so it responds as soon as the
