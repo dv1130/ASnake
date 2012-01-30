@@ -10,20 +10,17 @@ import android.widget.Toast;
 
 public class ServiceSound extends Service
 {	
-	private static final String TAG = "MojServis";
 	MediaPlayer sound1;
-	
+
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
 	@Override
 	public void onCreate()
 	{
-;
 	}
 
 	@Override
@@ -31,13 +28,12 @@ public class ServiceSound extends Service
 	{		
 		sound1.stop();
 	}
-	
+
 	@Override
 	public void onStart(Intent intent, int startid)
 	{
-		Log.d(TAG, "onStart");
-		 sound1 = MediaPlayer.create(this, R.raw.cowboy);
-		 sound1.start();
-		 sound1.setLooping(true);
+		sound1 = MediaPlayer.create(this, R.raw.cowboy);
+		sound1.start();
+		sound1.setLooping(true);
 	}
 }

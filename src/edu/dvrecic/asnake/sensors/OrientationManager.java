@@ -3,6 +3,7 @@ package edu.dvrecic.asnake.sensors;
 import java.util.List;
 
 import edu.dvrecic.asnake.About;
+import edu.dvrecic.asnake.Game;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -24,8 +25,8 @@ public class OrientationManager {
 
 	/** Sides of the phone */
 	enum Side {
-		TOP,
-		BOTTOM,
+		UP,
+		DOWN,
 		LEFT,
 		RIGHT;
 	}
@@ -53,8 +54,8 @@ public class OrientationManager {
 	 */
 	public static boolean isSupported() {
 		if (supported == null) {
-			if (Orientation.getContext() != null) {
-				sensorManager = (SensorManager) Orientation.getContext()
+			if (Game.getContext() != null) {
+				sensorManager = (SensorManager) Game.getContext()
 						.getSystemService(Context.SENSOR_SERVICE);
 				List<Sensor> sensors = sensorManager.getSensorList(
 						Sensor.TYPE_ORIENTATION);
@@ -71,7 +72,7 @@ public class OrientationManager {
 	 */
 	public static void startListening(
 			OrientationListener orientationListener) {
-		sensorManager = (SensorManager) Orientation.getContext()
+		sensorManager = (SensorManager) Game.getContext()
 				.getSystemService(Context.SENSOR_SERVICE);
 		List<Sensor> sensors = sensorManager.getSensorList(
 				Sensor.TYPE_ORIENTATION);
@@ -79,7 +80,7 @@ public class OrientationManager {
 			sensor = sensors.get(0);
 			running = sensorManager.registerListener(
 					sensorEventListener, sensor, 
-					SensorManager.SENSOR_DELAY_GAME);
+					SensorManager.SENSOR_DELAY_NORMAL);
 			listener = orientationListener;
 		}
 	}
@@ -101,51 +102,36 @@ public class OrientationManager {
 
 		/*
 		 * dodati senzorje za nagib levo,desno
-		 * animacijo telesa
 		 */
 		public void onSensorChanged(SensorEvent event) {
 
-			azimuth = event.values[0];     // azimuth
-			pitch = event.values[1];     // pitch
-			roll = event.values[2];        // roll
+			azimuth = event.values[0];
+			pitch = event.values[1];
+			roll = event.values[2];
 
-			if(azimuth < 30) {
-				currentSide = Side.TOP;
-			} else if (pitch > -15 && azimuth > 200){
+			if(azimuth > 300 && roll < 0) {
+				currentSide = Side.UP;
+			} else if (pitch < -18){
 				currentSide = Side.RIGHT;
-			} else if (pitch > 15){
+			} else if (pitch > 20){
 				currentSide = Side.LEFT;
-			} else if (roll > 30){
-				currentSide = Side.BOTTOM;
+			} else if (roll > 25){
+				currentSide = Side.DOWN;
 			}
-			/*if (pitch < -45 && pitch > -135) {
-                // top side up
-                currentSide = Side.TOP;
-            } else if (pitch > 45 && pitch < 135) {
-                // bottom side up
-                currentSide = Side.BOTTOM;
-            } else if (roll > 45) {
-                // right side up
-                currentSide = Side.RIGHT;
-            } else if (roll < -45) {
-                // left side up
-                currentSide = Side.LEFT;
-            }
-            */
 
 			if (currentSide != null && !currentSide.equals(oldSide)) {
 				switch (currentSide) {
-				case TOP : 
-					listener.onTopUp();
+				case UP : 
+					listener.onUp();
 					break;
-				case BOTTOM : 
-					listener.onBottomUp();
-					break;
-				case LEFT: 
-					listener.onLeftUp();
+				case DOWN : 
+					listener.onDown();
 					break;
 				case RIGHT: 
-					listener.onRightUp();
+					listener.onRight();
+					break;
+				case LEFT: 
+					listener.onLeft();
 					break;
 				}
 				oldSide = currentSide;

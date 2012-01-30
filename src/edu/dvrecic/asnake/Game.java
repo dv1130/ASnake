@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import edu.dvrecic.asnake.database.DatabaseHelper;
+import edu.dvrecic.asnake.sensors.OrientationListener;
+import edu.dvrecic.asnake.sensors.OrientationManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,8 +16,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
-public class Game extends Activity {
+public class Game extends Activity implements OrientationListener {
 
 	private Snake snakeView;
 	DatabaseHelper databaseHelper;
@@ -34,17 +37,19 @@ public class Game extends Activity {
 		snakeView = (Snake) findViewById(R.id.snake);
 		app = (ApplicationASnake) getApplication();
 		snakeView.setParentActivity(this);
-/*		CONTEXT = this;
+
+		CONTEXT = this;
 		
-		if (OrientationManager.isSupported()) {
+		if (OrientationManager.isSupported() && app.isSensorOFF() == true) {
 			OrientationManager.startListening(this);
-		}*/
+		}
+
 	}
-	
+
 	// funkcija, ki doda ime in rezultat v bazo
 	protected void insertResult(String ime, int rezultat){	
 		Calendar cal = Calendar.getInstance();
-	    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm yyyy-MM-dd");
 
 		Log.w("baza","zapis v bazo");
 		ContentValues cv = new ContentValues();
@@ -88,7 +93,7 @@ public class Game extends Activity {
 		//snakeView.stop();
 		insertResult(app.getName(), snakeView.maxRezultat); // klic funkcije za shranjevanje v bazo
 	}
-	
+
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case LOSE_DIALOG:
@@ -107,6 +112,51 @@ public class Game extends Activity {
 			return builder.create();
 		}
 		return null;
+	}
+
+	@Override
+	public void onOrientationChanged(float azimuth, float pitch, float roll) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onUp() {
+		// TODO Auto-generated method stub
+		if (snakeView.smer != snakeView.JUG) {
+			snakeView.naslednjaSmer = snakeView.SEVER;
+		}
+	}
+
+	@Override
+	public void onDown() {
+		// TODO Auto-generated method stub
+		if (snakeView.smer != snakeView.SEVER) {
+			snakeView.naslednjaSmer = snakeView.JUG;
+		}
+
+	}
+
+	@Override
+	public void onLeft() {
+		// TODO Auto-generated method stub
+		// desna je leva
+		if (snakeView.smer != snakeView.VZHOD) {
+			snakeView.naslednjaSmer = snakeView.ZAHOD;
+		}
+	}
+
+	@Override
+	public void onRight() {
+		// TODO Auto-generated method stub
+		// leva je desna
+		if (snakeView.smer != snakeView.ZAHOD) {
+			snakeView.naslednjaSmer = snakeView.VZHOD;
+		}
+	}
+
+	public static Context getContext() {
+		return CONTEXT;
 	}
 
 }

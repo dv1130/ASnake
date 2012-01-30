@@ -156,22 +156,29 @@ public class ASnakeActivity extends Activity implements OnClickListener{
 	}
 	
 	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		
+	}
+	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		System.out.println("destroy");
 		stopService(new Intent(this, ServiceSound.class));
-		
+		System.out.println("destroy");
 	}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		stopService(new Intent(this, ServiceSound.class));
 	}
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		startService(new Intent(this, ServiceSound.class));
 	}
 	
 }

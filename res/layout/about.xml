@@ -59,7 +59,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:id="@+id/textViewOpis"
@@ -69,7 +69,9 @@
             android:layout_weight="0.56"
             android:gravity="left"
             android:text="Se dolgocasite? Potem je ta igra prav za vas.
-ASnake je preprosta igra, kjer smo v vlogi kace in lovimo misi, ter zbiramo jajca! Za vsako mis dobimo tocko, med tem ko za vsako jajce dobimo nakljucen event."
+ASnake je preprosta igra, kjer smo v vlogi kace in lovimo misi, ter zbiramo jajca!
+Za vsako mis dobimo tocko, med tem ko za vsako jajce 
+dobimo nakljucen event."
             android:textColor="#000000"
             android:textSize="8pt" />
     </LinearLayout>

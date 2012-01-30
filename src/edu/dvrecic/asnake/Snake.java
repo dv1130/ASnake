@@ -2,6 +2,9 @@ package edu.dvrecic.asnake;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import edu.dvrecic.asnake.sensors.OrientationListener;
+import edu.dvrecic.asnake.sensors.OrientationManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,16 +19,17 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
-public class Snake extends SurfaceView implements Runnable{
+public class Snake extends SurfaceView implements Runnable {
 
 	// deklaracija spremenljivk za smer kace
-	private static final int SEVER = 1;
-	private static final int JUG = 2;
-	private static final int ZAHOD = 3;
-	private static final int VZHOD = 4;
-	private int smer = JUG;
-	public int naslednjaSmer = ZAHOD;
+	protected final int SEVER = 1;
+	protected final int JUG = 2;
+	protected final int ZAHOD = 3;
+	protected final int VZHOD = 4;
+	protected int smer = JUG;
+	protected int naslednjaSmer = ZAHOD;
 
 	// deklaracija spremenljivk za Bitmap
 	int velikostBitmap;
@@ -122,11 +126,6 @@ public class Snake extends SurfaceView implements Runnable{
 		tfGame = Typeface.createFromAsset(context.getAssets(),"data/fonts/eye.TTF");
 
 		CONTEXT = context;
-		
-		
-		/*		if (OrientationManager.isSupported()) {
-			OrientationManager.startListening(this);
-		}*/
 
 	}
 
@@ -416,10 +415,12 @@ public class Snake extends SurfaceView implements Runnable{
 		for (int i = 0; i < dolzinaKace; i++) {
 			KoordinateXY c = kaca.get(i);
 			if (c.primerjaj(glava)) {
+				int life = 2;
+
 				stanje = IZGUBIL;	
 				if(rezultat > maxRezultat)
 					maxRezultat = rezultat;
-				//return;
+				return;
 			}
 		}
 		int stMisi = miske.size();
@@ -575,7 +576,7 @@ public class Snake extends SurfaceView implements Runnable{
 		}
 		return false;
 	}
-	/*	@Override
+/*		@Override
 	public void onOrientationChanged(float azimuth, float pitch, float roll) {
 		// TODO Auto-generated method stub
 
@@ -587,14 +588,14 @@ public class Snake extends SurfaceView implements Runnable{
 		if (smer != JUG) {
 			naslednjaSmer = SEVER;
 		}
-		Toast.makeText(CONTEXT, "UP", Toast.LENGTH_LONG).show();
+		Toast.makeText(CONTEXT, "GOR", Toast.LENGTH_LONG).show();
 
 	}
 
 	@Override
 	public void onBottomUp() {
 		// TODO Auto-generated method stub
-		Toast.makeText(CONTEXT, "bottmUP", Toast.LENGTH_LONG).show();
+		Toast.makeText(CONTEXT, "DOL", Toast.LENGTH_LONG).show();
 		if (smer != SEVER) {
 			naslednjaSmer = JUG;
 		}
