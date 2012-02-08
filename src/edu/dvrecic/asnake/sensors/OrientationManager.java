@@ -109,7 +109,7 @@ public class OrientationManager {
 			pitch = event.values[1];
 			roll = event.values[2];
 
-			if(azimuth > 300 && roll < 0) {
+			if(roll < 0) {
 				currentSide = Side.UP;
 			} else if (pitch < -18){
 				currentSide = Side.RIGHT;

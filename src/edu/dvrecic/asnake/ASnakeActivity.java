@@ -159,6 +159,7 @@ public class ASnakeActivity extends Activity implements OnClickListener{
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
+		stopService(new Intent(this, ServiceSound.class));
 		
 	}
 	@Override
@@ -178,7 +179,6 @@ public class ASnakeActivity extends Activity implements OnClickListener{
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		startService(new Intent(this, ServiceSound.class));
 	}
 	
 }

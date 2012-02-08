@@ -3,8 +3,6 @@ package edu.dvrecic.asnake;
 import java.util.ArrayList;
 import java.util.Random;
 
-import edu.dvrecic.asnake.sensors.OrientationListener;
-import edu.dvrecic.asnake.sensors.OrientationManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,7 +17,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 public class Snake extends SurfaceView implements Runnable {
 
@@ -66,8 +63,6 @@ public class Snake extends SurfaceView implements Runnable {
 	int razmik; // razmik izrisa
 	boolean desno = false;
 	private Game parentActivity;
-	///private static int odmikX; // odmik izrisa po X
-	//private static int odmikY; // odmik izrisa po Y;
 	private int[][] polje2D;
 	int rezultat = 0;
 	int maxRezultat;
@@ -78,7 +73,6 @@ public class Snake extends SurfaceView implements Runnable {
 	SurfaceHolder holder;
 	boolean isItOK = false;
 	Typeface tfScore, tfGame;
-	private static Context CONTEXT;
 
 	public Snake(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -124,9 +118,6 @@ public class Snake extends SurfaceView implements Runnable {
 
 		tfScore = Typeface.createFromAsset(context.getAssets(),"data/fonts/fdfruta.ttf");
 		tfGame = Typeface.createFromAsset(context.getAssets(),"data/fonts/eye.TTF");
-
-		CONTEXT = context;
-
 	}
 
 	@Override
@@ -239,14 +230,11 @@ public class Snake extends SurfaceView implements Runnable {
 
 	public void stop(){
 		Log.w("gameview","stop");
-		//t.stop();
-		//t.stop();
 	}
 
 	public void destroy(){
 		Log.w("gameview","destroy");
 		t.destroy();
-		//t.stop();
 	}
 	//###### KACA ################################################
 	private class KoordinateXY {
@@ -335,9 +323,6 @@ public class Snake extends SurfaceView implements Runnable {
 			}
 			obstaja = !trk;
 		}
-		if (noveCoord == null) {
-			Log.w("MIS", "Mis error");
-		}
 		miske.add(noveCoord);
 	}
 
@@ -360,9 +345,6 @@ public class Snake extends SurfaceView implements Runnable {
 				}
 			}
 			obstaja = !trk;
-		}
-		if (noveCoord == null) {
-			Log.w("EGG", "EGG error3243");
 		}
 		jajca.add(noveCoord);
 
@@ -415,8 +397,6 @@ public class Snake extends SurfaceView implements Runnable {
 		for (int i = 0; i < dolzinaKace; i++) {
 			KoordinateXY c = kaca.get(i);
 			if (c.primerjaj(glava)) {
-				int life = 2;
-
 				stanje = IZGUBIL;	
 				if(rezultat > maxRezultat)
 					maxRezultat = rezultat;
@@ -456,6 +436,7 @@ public class Snake extends SurfaceView implements Runnable {
 				hitrost = staraHitrost;
 				System.out.println(hitrost);
 				int r = randomSt.nextInt(10);
+				r = 2;
 				if(r == 0){
 					staraHitrost = hitrost;
 					hitrost = 50;
@@ -526,17 +507,11 @@ public class Snake extends SurfaceView implements Runnable {
 	{
 		float x = event.getX();
 		float y = event.getY();
-		//float height = 404;
-		//float width = 800;
 		float slope = height/width;
 
-		// Only process DOWN action, so it responds as soon as the
-		// screen is touched.
 		if (event.getAction()==MotionEvent.ACTION_DOWN)
 		{
 			if (stanje == PRIPRAVLJEN) {
-				// At the beginning of the game, or the end of a previous one,
-				// we should start a new game.	
 				initNovaIgra();
 				stanje = IGRA_TECE;
 				osvezi();
@@ -550,23 +525,18 @@ public class Snake extends SurfaceView implements Runnable {
 				}
 				return (true);
 			}
-			// Touch event DOWN
 			if ((y > slope*x) && (y > -slope*x + height)) { 
 				if (smer != SEVER) {
 					naslednjaSmer = JUG;
 				}
 				return (true);
 			}
-
-			// Touch event LEFT
 			if ((y > slope*x) && (y < (-slope*x + height))) {
 				if (smer != VZHOD) {
 					naslednjaSmer = ZAHOD;
 				}
 				return (true);
 			}
-
-			// Touch event RIGHT
 			if ((y < slope*x) && (y > -slope*x + height)) {
 				if (smer != ZAHOD) {
 					naslednjaSmer = VZHOD;
@@ -576,49 +546,4 @@ public class Snake extends SurfaceView implements Runnable {
 		}
 		return false;
 	}
-/*		@Override
-	public void onOrientationChanged(float azimuth, float pitch, float roll) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onTopUp() {
-		// TODO Auto-generated method stub
-		if (smer != JUG) {
-			naslednjaSmer = SEVER;
-		}
-		Toast.makeText(CONTEXT, "GOR", Toast.LENGTH_LONG).show();
-
-	}
-
-	@Override
-	public void onBottomUp() {
-		// TODO Auto-generated method stub
-		Toast.makeText(CONTEXT, "DOL", Toast.LENGTH_LONG).show();
-		if (smer != SEVER) {
-			naslednjaSmer = JUG;
-		}
-
-
-	}
-
-	@Override
-	public void onRightUp() {
-		// TODO Auto-generated method stub
-		if (smer != VZHOD) {
-			naslednjaSmer = ZAHOD;
-		}
-		Toast.makeText(CONTEXT, "DESNO", Toast.LENGTH_LONG).show();
-	}
-
-	@Override
-	public void onLeftUp() {
-		// TODO Auto-generated method stub
-		if (smer != ZAHOD) {
-			naslednjaSmer = VZHOD;
-		}
-		Toast.makeText(CONTEXT, "LEVO", Toast.LENGTH_LONG).show();
-
-	}*/
 }

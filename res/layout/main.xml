@@ -9,7 +9,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/background"
         android:orientation="vertical" >
-
+
         <TextView
             android:id="@+id/start"
             style="@style/MenuFont"
